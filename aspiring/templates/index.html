@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actualités - Chorus Pro</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    .hero-bg { background: linear-gradient(135deg, #005aaa 0%, #003366 100%); }
+    .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+    .fr-logo { font-family: "Marianne", sans-serif; }
+
+    /* Améliorations Mobile */
+    @media (max-width: 768px) {
+      .top-tabs { overflow-x: auto; scrollbar-width: none; }
+      .top-tabs::-webkit-scrollbar { display: none; }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Petits boutons flottants -->
+  <div id="floatingButtons" class="fixed top-4 right-4 md:right-6 z-50 flex flex-col sm:flex-row gap-3">
+    <a href="#main-content" onclick="closeFloatingButtons()" 
+       class="bg-white shadow-md text-[#005aaa] text-sm px-4 py-2 rounded-2xl hover:bg-gray-100 transition-colors flex items-center gap-2 whitespace-nowrap">
+      Aller au contenu
+    </a>
+    <a href="#" onclick="closeFloatingButtons()" 
+       class="bg-white shadow-md text-[#005aaa] text-sm px-4 py-2 rounded-2xl hover:bg-gray-100 transition-colors flex items-center gap-2 whitespace-nowrap">
+      Aller à l'assistant virtuel ClaudIA
+    </a>
+  </div>
+
+  <!-- ALERTE ROUGE -->
+  <div id="alertBanner" class="bg-red-400 text-white py-4 px-5 md:px-6">
+    <div class="max-w-7xl mx-auto flex items-start gap-4">
+      <i class="fa-solid fa-circle-info text-xl mt-0.5"></i>
+      <div class="flex-1">
+        <strong>[INFORMATION]</strong> - Dysfonctionnement de la fonction de reconnaissance des factures PDF<br>
+        <span class="text-sm">
+          Vous pouvez rencontrer le message d'erreur "La fonctionnalité d'océrisation n'a pas pu extraire automatiquement les données de la facture. Nous vous prions de bien vouloir compléter les champs manuellement". 
+          Ce message n'est pas bloquant, vous pouvez continuer le dépôt de votre facture en saisissant les champs non renseignés automatiquement.
+        </span>
+      </div>
+      <button onclick="closeAlert()" class="bg-white text-red-600 px-5 py-2 rounded-xl font-medium hover:bg-red-50">Fermer</button>
+    </div>
+  </div>
+
+  <!-- Top Tabs -->
+  <div class="bg-gray-100 border-b">
+    <div class="max-w-7xl mx-auto">
+      <div class="top-tabs flex items-center h-16 border-b overflow-x-auto">
+        <div class="w-6 md:w-24 h-full bg-gray-100 flex-shrink-0"></div>
+        
+        <a class="px-6 md:px-10 py-5 md:py-10 bg-[#005aaa] text-white border-r whitespace-nowrap">Entreprise</a>
+        <a class="px-6 md:px-10 py-5 bg-white text-violet-500 border-r whitespace-nowrap">Entité publique</a>
+        <a class="px-6 md:px-10 py-5 bg-white text-green-500 border-r whitespace-nowrap">Particulier</a>
+        <a class="px-6 md:px-10 py-5 bg-white text-amber-800 border-r whitespace-nowrap">Association</a>
+        
+        <div class="w-6 md:w-24 h-full bg-gray-100 flex-shrink-0"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Principal -->
+  <header class="bg-white border-b sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 py-5 md:py-6 flex flex-col md:flex-row md:items-center gap-6 md:justify-between">
+      <div class="flex items-center gap-4">
+       <img src="{{ url_for('static', filename='logo.png') }}"
+     alt="République Française" class="h-12 md:h-16 w-auto">
+
+<img src="{{ url_for('static', filename='logo-chorus.png') }}"
+     alt="Logo Chorus Pro" class="h-9 md:h-12 w-auto">
+        <div class="flex flex-col justify-center">
+          <span class="fr-logo text-lg md:text-xl font-bold text-[#005aaa] leading-tight">Chorus Pro</span>
+          <span class="text-xs text-gray-500">Portail de services</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:block text-[#005aaa]">
+        <div class="flex items-center gap-8 text-xl font-semibold">
+          <a href="#" class="hover:underline">Accueil</a>
+          <a href="#" class="hover:underline font-semibold">Actualités</a>
+          <a href="#" class="hover:underline flex items-center gap-2">Domaines <i class="fa-solid fa-chevron-down text-sm"></i></a>
+          <a href="#" class="hover:underline flex items-center gap-2">Support <i class="fa-solid fa-chevron-down text-sm"></i></a>
+        </div>
+        <div class="mt-2 flex justify-center">
+          <a href="#" class="text-xl font-semibold text-[#005aaa] flex items-center gap-2 hover:underline">
+            Documentation <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+          </a>
+        </div>
+      </nav>
+<div class="flex flex-col items-end gap-3">
+
+    <!-- Créer un compte -->
+  <a href="register.html"
+   class="w-full pl-2 text-left text-[#005aaa] text-sm font-semibold hover:underline">
+    Créer un compte
+</a>
+
+  <a href="/login"
+   class="bg-[#005aaa] text-white h-10 px-6 rounded-2xl font-medium text-lg hover:bg-[#003d80] flex items-center justify-center gap-3 w-full"
+    <i class="fa-regular fa-user"></i>
+    <span>Se connecter</span>
+
+</a>
+</div>
+    </div>
+  </header>
+
+  <!-- Section Bienvenue + Domaines -->
+  <section class="py-10 bg-white">
+    <div class="max-w-7xl mx-auto px-5 md:px-6 flex flex-col lg:flex-row gap-8 items-start">
+      
+      <!-- Colonne gauche - Bienvenue -->
+      <div class="bg-[#005aaa] text-white rounded-3xl p-8 lg:w-[300px] flex-shrink-0">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">Bienvenue sur le Portail Chorus Pro</h2>
+        <p class="text-lg leading-8 mb-6">
+          Afin de simplifier la vie des entreprises et de réduire les délais de paiement,
+          les administrations publiques se sont dotées de la plateforme
+          <strong>Chorus Pro</strong> pour la réception des factures de leurs fournisseurs.
+        </p>
+        <p class="text-lg leading-8 mb-8">
+          Chorus Pro est obligatoire et accessible par de nombreuses modalités répondant
+          aux besoins des entreprises...
+        </p>
+        <a href="#" class="font-semibold hover:underline inline-flex items-center gap-2">
+          Accéder à la documentation <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+
+      <!-- Colonne droite - Domaines -->
+      <div class="flex-1">
+        <div class="bg-gray-100 rounded-3xl p-6 md:p-8">
+          <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+            <h2 class="text-3xl font-bold text-gray-900">Les domaines Chorus Pro</h2>
+            <a href="#" class="border border-gray-300 rounded-2xl px-5 py-3 bg-white text-gray-700 font-semibold shadow-sm hover:bg-gray-50 transition whitespace-nowrap">
+              Je veux créer mon compte... 🔍
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Annuaire facturation -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Annuaire facturation</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Annuaire de la facturation électronique</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+
+            <!-- Facturation -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Facturation</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Factures, factures de travaux, frais de justice, remboursement de taxes</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+
+            <!-- Marché -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Marché</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Consultations, DUME</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+
+            <!-- Commande -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Commande</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Engagements, certificats de cessibilité</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+
+            <!-- Organisation -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Organisation</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Structures, utilisateurs, annuaire des structures publiques</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+
+            <!-- Raccordements -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Raccordements</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Raccordements EDI et API</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+
+            <!-- Outils -->
+            <div class="border rounded-3xl p-6 md:p-8 bg-white hover:shadow-xl transition-all duration-300">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight">Outils</h3>
+              <p class="text-gray-600 mt-4 text-[17px] leading-relaxed">Signature</p>
+              <a href="#" class="mt-10 inline-block text-[#005aaa] font-semibold hover:underline text-lg">Accéder au domaine →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Officiel - Blanc -->
+  <footer class="bg-white border-t border-gray-200 pt-12 pb-8">
+    <div class="max-w-7xl mx-auto px-5 md:px-6">
+      
+      <!-- République Française -->
+      <div class="flex items-center gap-4 mb-12 md:mb-20">
+        <img src="{{ url_for('static', filename='logo.png') }}"
+     alt="Logo République Française" class="h-20 md:h-40 w-auto">
+        <div class="leading-tight">
+          
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+        
+        <!-- Version et Langue -->
+        <div>
+          <p class="text-sm text-gray-500 mb-1">Version</p>
+          <p class="font-semibold text-gray-900">V4.3.3</p>
+          
+          <div class="mt-6">
+            <p class="text-sm text-gray-500 mb-2">Langue</p>
+            <div class="flex gap-4">
+              <a href="#" class="text-gray-700 hover:text-[#005aaa] transition font-medium" aria-current="page">Français</a>
+              <a href="#" class="text-gray-700 hover:text-[#005aaa] transition">English</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nous suivre -->
+        <div>
+          <h4 class="text-lg font-bold text-[#005aaa] mb-4">Nous suivre</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition flex items-center gap-2">Twitter <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition flex items-center gap-2">Dailymotion <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition flex items-center gap-2">Youtube <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition flex items-center gap-2">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Nous connaître -->
+        <div>
+          <h4 class="text-lg font-bold text-[#005aaa] mb-4">Nous connaître</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Plan du site</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Nous contacter</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition flex items-center gap-2">Notes de version <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a></li>
+          </ul>
+        </div>
+
+        <!-- Nos engagements -->
+        <div>
+          <h4 class="text-lg font-bold text-[#005aaa] mb-4">Nos engagements</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Conditions générales d'utilisation</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Engagement et qualité</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Accessibilité : partiellement conforme</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Gestion des cookies</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Données personnelles et sécurité</a></li>
+            <li><a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Mentions légales</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sites connexes -->
+      <div class="mt-12 pt-8 border-t border-gray-400">
+        <h4 class="text-lg font-bold text-[#005aaa] mb-4">Sites connexes</h4>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+          <a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Info.gouv.fr <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+          <a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Service-public.gouv.fr <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+          <a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Legifrance.gouv.fr <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+          <a href="#" class="text-gray-700 hover:text-[#005aaa] transition">Data.gouv.fr <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i></a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="border-t border-gray-200 mt-12 pt-6 text-center text-sm text-gray-500">
+        © AIFE - Agence pour l'Informatique Financière de l'État
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function closeAlert() {
+      document.getElementById('alertBanner').style.display = 'none';
+    }
+
+    function closeFloatingButtons() {
+      document.getElementById('floatingButtons').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
